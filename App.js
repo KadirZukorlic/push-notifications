@@ -86,11 +86,37 @@ export default function App() {
 		})
 	}
 
+	function sendPushNotificationHandler() {
+		const expoPushToken = 'here goes epxoPushToken'
+
+		const message = {
+			to: expoPushToken, // demo
+			sound: 'default',
+			title: 'Original Title',
+			body: 'And here is the body!',
+			data: { someData: 'goes here' }
+		}
+
+		 fetch('https://exp.host/--/api/v2/push/send', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Accept-encoding': 'gzip, deflate',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(message)
+		})
+	}
+
 	return (
 		<View style={styles.container}>
 			<Button
 				title="Schedule Notification"
 				onPress={scheduleNotificationHandler}
+			/>
+			<Button
+				title="Send Push Notification"
+				onPress={sendPushNotificationHandler}
 			/>
 			<StatusBar style="auto" />
 		</View>
